@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'"> -->  
+    
+    <title>Send Sensor</title>
+  </head>
+  <body>    
+    <div id="insert_server_temperature_cpu"></div>
+    <div id="insert_server_temperature_gpu"></div>
+    <div id="insert_server_temperature_poll"></div> <br>
+    <div id="insert_server_status"></div><br>
+    <div id="insert_status"></div><br><br><br>
+    <div id="insert_server_warning"></div>
+    <div id="insert_sensors_sensor"></div>
+    <div id="insert_sensors_nvidia"></div>    
+    <script>window.$ = window.jQuery = require('../sendsensor/lib/jquery.min');</script>
+    <script type="text/javascript">
+      require('../render/renderer')
+    </script>
+  </body>
+</html>

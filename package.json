@@ -1,0 +1,115 @@
+{
+  "name": "sendsensor",
+  "productName": "Send Sensor",
+  "appId": "com.efmer.sendsensor",
+  "author": "eFMer",
+  "url": "https://efmer.com/",
+  "license": "GPL-3.0-or-later",
+  "version": "1.0.0",
+  "description": "Sends sensor data to connected app",
+  "copyright": "Copyright © 2021 ${author}",
+  "main": "main.js",
+  "scripts": {
+    "make": "electron-forge make",    
+    "snapI64": "electron-builder --linux snap --x64",
+    "linux": "electron-builder --linux deb"
+  },
+  "build": {
+    "asar": true,
+    "appId": "com.efmer.sendsensor",
+    "compression": "maximum",
+    "linux": {
+      "executableName": "sendsensor",
+      "icon": "appicons/icons/mac/icon.icns",
+      "target": [
+        "deb"
+      ]
+    },
+    "deb": {},
+    "files": [
+      "./appicons/icons/**",
+      "./sendsensor/**",
+      "./index/**",
+      "./render/**",
+      "./preload",
+      "main.js",
+      "!.git",
+      "!.github",
+      "!.gitignore",
+      "!.vscode",
+      "!package.json",
+      "!out",
+      "!download",
+      "!how-to",
+      "!snap",
+      "!private"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/efmer/sendsensor"
+  },
+  "keywords": [
+    "boinc",
+    "boinctasks",
+    "sensors"
+  ],
+  "devDependencies": {
+    "electron": "^12.0.5",
+    "electron-builder": "^22.10.5",
+    "@electron-forge/cli": "^6.0.0-beta.54",
+    "@electron-forge/maker-deb": "^6.0.0-beta.54",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.54",
+    "@electron-forge/maker-zip": "^6.0.0-beta.54"
+  },
+  "config": {
+    "icon": "appicons/icons/mac/icon.icns",
+    "forge": {
+      "packagerConfig": {
+        "asar": true,
+        "icon": "appicons/icons/mac/icon.icns",
+        "executableName": "sendsensor",
+        "name": "Send Sensor",
+        "osxSign": {
+          "hardened-runtime": true,
+          "entitlements": "build/entitlements.mac.plist",
+          "entitlements-inherit": "build/entitlements.mac.plist",
+          "signature-flags": "library"
+        },
+        "osxNotarize": {},
+        "ignore": [
+          ".git",
+          ".github",
+          ".gitignore",
+          ".vscode",
+          "out",
+          "download",
+          "how-to",
+          "snap",
+          "private",
+          "dist"
+        ]
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-zip",
+          "config": {
+            "icon": "appicons/icons/mac/icon.icns"
+          },
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {
+            "icon": "./appicons/icons/png/512x512.png"
+          },
+          "platforms": [
+            "linux"
+          ]
+        }
+      ]
+    }
+  }
+}

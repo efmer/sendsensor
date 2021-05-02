@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'"> -->  
+    <link rel="stylesheet" href="../boinctasks/css/bt.css">
+    <title>About</title>
+  </head>
+  <body>
+    <img src="../sendsensor/css/img/icon.png"><br>
+    <b>Send Sensor, send data from sensor programs to connected IP addres.</b><br>
+    <br>
+    © Copyright 2021 <a href="https://efmer.com/">eFMer</a>, Fred Melgert<br>
+    <br>
+    This program is free software: you can redistribute it and/or modify<br>
+    it under the terms of the GNU General Public License as published by<br>
+    the Free Software Foundation, version 3 of the License.<br>
+    <br>
+    This program is distributed in the hope that it will be useful,<br>
+    but WITHOUT ANY WARRANTY; without even the implied warranty of<br>
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the<br>
+    GNU General Public License for more details.<br>
+  
+    You should have received a copy of the GNU General Public License<br>
+    along with this program.  If not, see <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPLv3</a>.<br>
+    <br>
+    The following software was used to create Send Sensors:<br>
+    <a href="https://github.com/electron/electron">Electron</a><br>
+    <a href="https://nodejs.org/">Node.js</a><br>
+    <a href="https://jquery.com/">jQuery</a><br>
+    <br>
+    <br>
+    <div id="about_system_text"></div>
+    <script>window.$ = window.jQuery = require('../sendsensor/lib/jquery.min');</script>
+    <script type="text/javascript">
+      require('../render/renderer_credits')
+    </script>
+  </body>
+</html>

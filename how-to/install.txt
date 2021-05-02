@@ -1,0 +1,20 @@
+https://www.techomoro.com/how-to-install-and-set-up-electron-on-windows-10/
+
+electron - client <<<<<<<<<<<<<<< We use
+express - server side
+
+        1) Install node.js
+        https://nodejs.org/en/
+        Install current version
+        Do not check Automatically install etc
+
+        Check if installed:
+
+        node -v
+        npm -v 
+
+        2) Install electron
+
+        npm i --save-dev electron 
+
+        npm i --save -dev electron-builder

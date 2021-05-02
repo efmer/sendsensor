@@ -1,0 +1,56 @@
+// FORGE
+
+// Installer
+move package from Windows machine to Linux folder DO NOT include the node_modules folder
+remove package-lock.json and node_modules folder from target machine
+cd /home/fred/sb/sendsensor/
+npm update --dd
+
+//////////////////////////////////////////////////////////
+// deb
+
+// forge
+npm run make
+builds in:
+intermediate -> out\sendsensor-linux-x64
+deb -> out\make\deb\x64 
+sudo dpkg --remove sendsensor
+cd /home/fred/sb/sendsensor/out/make/deb/x64
+sudo dpkg -i ./sendsensor_1.0.0_amd64.deb
+sendsensor
+
+// This works with a sandbox error for now.
+npm run linux
+cd /home/fred/sb/sendsensor/dist
+sudo dpkg --remove sendsensor
+sudo dpkg -i ./sendsensor_1.0.0_amd64.deb
+
+sendsensor
+
+// start app for testing
+npm start
+
+Probably Cannot work because of system access.
+/////////////////////////////////////////////////////////
+// snap
+
+sudo snap install snapcraft --classic
+sudo snap install review-tools
+sudo apt install yamllint
+snapcraft init
+
+//electron-builder
+cd /home/fred/sb/sendsensor/
+npm run snapI64
+
+cd /home/fred/sb/sendsensor/dist
+snapcraft login
+snapcraft upload --release=candidate sendsensor_1.0.0_amd64.snap
+
+// testing
+cd /home/fred/sb/sendsensor/dist/
+// match the version number
+// we need dangerous because the file isn't signed
+// make sure the deb is NOT installed
+sudo dpkg --remove sendsensor
+sudo snap install sendsensor_1.0.0_amd64.snap --dangerous

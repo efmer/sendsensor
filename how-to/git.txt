@@ -1,0 +1,20 @@
+https://github.com/efmer/boinctasks-js.git
+
+$ git config --global user.name "John Doe" efmer
+$ git config --global user.email johndoe@example.com
+
+// first time only
+git init
+git add README.md
+git add --all
+git commit -m "version 1.00"
+git branch -M main
+git remote add origin https://github.com/efmer/sendsensor.git
+git push -u origin main
+
+// after that
+
+Pull
+Stage changes
+Commit
+Push
