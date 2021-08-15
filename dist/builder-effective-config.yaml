@@ -1,0 +1,31 @@
+directories:
+  output: dist
+  buildResources: build
+asar: true
+appId: com.efmer.sendsensor
+compression: maximum
+linux:
+  executableName: sendsensor
+  icon: appicons/icons/mac/icon.icns
+  target:
+    - deb
+deb: {}
+files:
+  - filter:
+      - ./appicons/icons/**
+      - ./sendsensor/**
+      - ./index/**
+      - ./render/**
+      - ./preload
+      - main.js
+      - '!.git'
+      - '!.github'
+      - '!.gitignore'
+      - '!.vscode'
+      - '!package.json'
+      - '!out'
+      - '!download'
+      - '!how-to'
+      - '!snap'
+      - '!private'
+electronVersion: 12.0.5

@@ -173,7 +173,7 @@ function initialize () {
       {
         if (gMainWindow.isMinimized())
         {
-          MainWindow.restore(); 
+          gMainWindow.restore(); 
         }
         else
         {
@@ -387,35 +387,41 @@ function stopTimer()
 
 function temperatureTimer()
 {
-  if (gTimerTemperatureTick === 0)
-  {
-    let visible = gMainWindow.isVisible();
-    let request = server.lastRequest();
-    let current = new Date().getTime();
-    let diff= current - request;
-    if (diff < 10000)   // stay active for 10 second after last request
+  try {
+   
+    if (gTimerTemperatureTick === 0)
     {
-      readSensors.read();
-      if (visible)
+      let visible = gMainWindow.isVisible();
+      let request = server.lastRequest();
+      let current = new Date().getTime();
+      let diff= current - request;
+      if (diff < 10000)   // stay active for 10 second after last request
       {
-        gMainWindow.webContents.send('insert_server_temperature_poll','');          
-      }      
+        readSensors.read();
+        if (visible)
+        {
+          gMainWindow.webContents.send('insert_server_temperature_poll','');          
+        }      
+      }
+      else
+      {
+        if (visible)
+        {          
+          readSensors.read();
+          gMainWindow.webContents.send('insert_server_temperature_poll','Polling idle as soon as this window closes');          
+        }
+      }
     }
     else
     {
-      if (visible)
-      {          
-        readSensors.read();
-        gMainWindow.webContents.send('insert_server_temperature_poll','Polling idle as soon as this window closes');          
-      }
+      server.temperature(readSensors.temperature());
     }
+    gTimerTemperatureTick++;
+    if (gTimerTemperatureTick > 1) gTimerTemperatureTick = 0;    
+
+  } catch (error) {
+    var ii = 1;
   }
-  else
-  {
-    server.temperature(readSensors.temperature());
-  }
-  gTimerTemperatureTick++;
-  if (gTimerTemperatureTick > 1) gTimerTemperatureTick = 0;
 }
 
 function showLog(logType)

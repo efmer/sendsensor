@@ -2,17 +2,19 @@
   "name": "sendsensor",
   "productName": "Send Sensor",
   "appId": "com.efmer.sendsensor",
-  "author": "eFMer",
+  "author": "eFMer <boinc@efmer.com>",
   "url": "https://efmer.com/",
   "license": "GPL-3.0-or-later",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Sends sensor data to connected app",
   "copyright": "Copyright © 2021 ${author}",
   "main": "main.js",
   "scripts": {
-    "make": "electron-forge make",    
+    "make": "electron-forge make",
+    "makeA32": "electron-forge make --arch=armv7l",
     "snapI64": "electron-builder --linux snap --x64",
-    "linux": "electron-builder --linux deb"
+    "linux": "electron-builder --linux deb",
+    "start": "electron-forge start"
   },
   "build": {
     "asar": true,
@@ -55,12 +57,12 @@
     "sensors"
   ],
   "devDependencies": {
-    "electron": "^12.0.5",
-    "electron-builder": "^22.10.5",
     "@electron-forge/cli": "^6.0.0-beta.54",
     "@electron-forge/maker-deb": "^6.0.0-beta.54",
     "@electron-forge/maker-rpm": "^6.0.0-beta.54",
-    "@electron-forge/maker-zip": "^6.0.0-beta.54"
+    "@electron-forge/maker-zip": "^6.0.0-beta.54",
+    "electron": "^12.0.5",
+    "electron-builder": "^22.10.5"
   },
   "config": {
     "icon": "appicons/icons/mac/icon.icns",

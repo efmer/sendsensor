@@ -45,4 +45,7 @@ $(document).ready(function() {
   ipcRenderer.on('insert_sensors_nvidia', (event, txt) => {
     $("#insert_sensors_nvidia").html(txt);
   });
+  ipcRenderer.on('insert_sensors_pi', (event, txt) => {
+    $("#insert_sensors_pi").html(txt);
+  });
 });

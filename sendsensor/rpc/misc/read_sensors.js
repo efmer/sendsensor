@@ -16,6 +16,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+const os = require('os');
 const { spawn } = require('child_process');
 
 const Logging = require('../functions/logging');
@@ -90,6 +91,7 @@ function sensorRead()
 
    setTimeout(function(){ readSensors(); }, 10);  //make async
    setTimeout(function(){ readNvidia(); }, 10);
+   setTimeout(function(){ readPi(); }, 10);   
 
    try {
       let txt = "";
@@ -262,4 +264,64 @@ function parseNvidia(data)
    }
    gSensors.gpuPList = gpuPList;   
    gSensors.gpuTList = gpuTList;
+}
+
+function readPi()
+{
+   try {
+      if (os.platform() !== 'linux')
+      {
+         gMainWindow.webContents.send('insert_sensors_pi', "pi: No Linux");
+         return;         
+      }
+      if (os.arch() !== 'arm')
+      {
+         gMainWindow.webContents.send('insert_sensors_pi', "pi: No Arm");
+         return;
+      }
+
+      if (DEBUG_FAKE)
+      {
+         let data = dataPi;
+         parsePi(data);
+      }
+      else
+      {
+         let completeData = "";
+         const pi = spawn('cat', ['/sys/class/thermal/thermal_zone0/temp']);
+       
+         pi.stdout.on('data', function(data) {
+            gMainWindow.webContents.send('insert_sensors_pi', "pi: OK");
+            completeData += data;
+         });      
+
+         pi.stderr.on('data', function(data) {
+            var ii = 1;
+         });         
+         
+         pi.on('close', function(code) {
+            let str = String(completeData);
+            parsePi(str);
+         });         
+
+         pi.on('error', function(err) {
+            gMainWindow.webContents.send('insert_sensors_pi', "pi: Not found");
+         });
+      } 
+   } catch (error) {
+      logging.logError('ReadSensors,readPi', error); 
+   }
+}
+
+function parsePi(data)
+{
+   let cpuTList = [];
+   try {
+      let temp = data /= 1000;
+      temp = Math.round(temp * 10) / 10;
+      cpuTList.push(temp)   
+   } catch (error) {
+      var ii =1;
+   }
+   gSensors.cpuTList = cpuTList;
 }

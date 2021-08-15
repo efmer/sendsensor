@@ -3,6 +3,8 @@
 // Installer
 move package from Windows machine to Linux folder DO NOT include the node_modules folder
 remove package-lock.json and node_modules folder from target machine
+
+// Linux x64
 cd /home/fred/sb/sendsensor/
 npm update --dd
 
@@ -30,27 +32,54 @@ sendsensor
 // start app for testing
 npm start
 
-Probably Cannot work because of system access.
-/////////////////////////////////////////////////////////
-// snap
+// PI
 
-sudo snap install snapcraft --classic
-sudo snap install review-tools
-sudo apt install yamllint
-snapcraft init
+cd /home/pi/sb
 
-//electron-builder
-cd /home/fred/sb/sendsensor/
-npm run snapI64
+// install npm 
 
-cd /home/fred/sb/sendsensor/dist
-snapcraft login
-snapcraft upload --release=candidate sendsensor_1.0.0_amd64.snap
+https://nodejs.org/en/download/ check lts version
+curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
+sudo apt install nodejs
+node --version
+npm -v
 
-// testing
-cd /home/fred/sb/sendsensor/dist/
-// match the version number
-// we need dangerous because the file isn't signed
-// make sure the deb is NOT installed
+// update npm
+If there is nothing installed yet run this first:
+npm install
+npm update --dd
+
+// forge
+npm run makeA32
+builds in:
+intermediate -> out/make/deb/armv7l
+
+deb -> out/make/deb/armv7l 
 sudo dpkg --remove sendsensor
-sudo snap install sendsensor_1.0.0_amd64.snap --dangerous
+cd /home/pi/sb/out/make/deb/armv7l
+sudo dpkg -i ./sendsensor_1.1.0_armhf.deb
+sendsensor
+
+// Samba PI
+sudo apt-get update
+sudo apt-get install samba samba-common-bin
+mkdir /home/pi/sb
+
+sudo nano /etc/samba/smb.conf
+
+Add to the bottom
+
+[sb]
+path = /home/pi/sb
+writeable=Yes
+create mask=0777
+directory mask=0777
+public=no
+
+Add password
+
+sudo smbpasswd -a pi
+
+Restart Samba
+
+sudo systemctl restart smbd
