@@ -5,9 +5,9 @@
   "author": "eFMer <boinc@efmer.com>",
   "url": "https://efmer.com/",
   "license": "GPL-3.0-or-later",
-  "version": "1.1.0",
+  "version": "1.2.1",
   "description": "Sends sensor data to connected app",
-  "copyright": "Copyright © 2021 ${author}",
+  "copyright": "Copyright © 2021-now ${author}",
   "main": "main.js",
   "scripts": {
     "make": "electron-forge make",
@@ -61,7 +61,7 @@
     "@electron-forge/maker-deb": "^6.0.0-beta.54",
     "@electron-forge/maker-rpm": "^6.0.0-beta.54",
     "@electron-forge/maker-zip": "^6.0.0-beta.54",
-    "electron": "^12.0.5",
+    "electron": "^22.0.2",
     "electron-builder": "^22.10.5"
   },
   "config": {

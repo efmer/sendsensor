@@ -148,7 +148,7 @@ function readSensors()
       else
       {
          let completeData = "";
-         const sensors = spawn('sensors',['-u','coretemp-isa-0000','-j']);
+         const sensors = spawn('sensors',['coretemp-isa-0000','-j']);
          
          sensors.stdout.on('data', function(data) {
             gMainWindow.webContents.send('insert_sensors_sensor', "sensors: OK");
